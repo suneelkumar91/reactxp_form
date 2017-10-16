@@ -3,8 +3,7 @@ import RX from 'reactxp';
 
 import ProgressIndicator from './ProgressIndicator';
 import ToggleSwitch from './ToggleSwitch';
-
-
+import DatePicker from './DatePicker';
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
@@ -13,11 +12,11 @@ const styles = {
     }),
     container: RX.Styles.createViewStyle({
         padding: 16,
-        justifyContent: 'center',
-        alignItems: 'center'
+        // justifyContent: 'left',
+        // alignItems: 'left'
     }),
     titleText: RX.Styles.createTextStyle({
-        fontSize: 16,
+        fontSize: 22,
         textAlign: 'center',
         marginTop: 12,
         color: 'black'
@@ -35,7 +34,8 @@ const styles = {
     roundButton: RX.Styles.createViewStyle({
         margin: 16,
         borderRadius: 16,
-        backgroundColor: '#7d88a9'
+        backgroundColor: '#7d88a9',
+        width: 100
     }),
     buttonText: RX.Styles.createTextStyle({
         fontSize: 16,
@@ -46,22 +46,39 @@ const styles = {
     textInput: RX.Styles.createViewStyle({
     	margin: 8,
     	borderWidth: 1,
+        width: 400,
+        height: 30,
+
+    }),
+    addressInput: RX.Styles.createViewStyle({
+        height: 70,
+        width: 400,
+        margin: 8,
+        borderWidth: 1,
+
+    }),
+    dropdown: RX.Styles.createViewStyle({
+        height: 30,
+        width: 400,
+        margin: 8,
+    }),
+
+    datePicker: RX.Styles.createViewStyle({
+        height: 30,
+        width: 100,
+        margin: 8
 
     })
 };
 
 const pickerItems: RX.Types.PickerPropsItem[] = [
     {
-        label: 'Cool',
-        value: 'cool'
+        label: 'Male',
+        value: 'male'
     },
     {
-        label: 'Super',
-        value: 'super'
-    },
-    {
-        label: 'Great',
-        value: 'great'
+        label: 'Female',
+        value: 'female'
     }
 ];
 
@@ -73,7 +90,7 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
         this.state = {
         	name: 'Suneel',
         	address: 'Cubix Inc',
-            mood: 'cool'
+            gender: 'male'
         }
     }
 
@@ -81,42 +98,41 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
 		return (
             <RX.ScrollView style={ styles.scroll }>
                 <RX.View style={ styles.container }>
+                    
+
+                    <RX.Text style={ styles.titleText }>
+                        Here is a simple form control built using ReactXP
+                    </RX.Text>
+                    <RX.Text> Full Name  </RX.Text>    
+                    <RX.TextInput placeholder="Full Name" defaultValue={this.state.name} onChangeText={this._onNameChange}  style={styles.textInput} /> 
+                    <RX.Text> Address </RX.Text>    
+                    <RX.TextInput placeholder="Address" multiline="true" defaultValue={this.state.address} onChangeText={this._onAddressChange}   style={[styles.addressInput]} />
+
+                    <RX.Text> { 'Gender' } </RX.Text>
+                    <RX.Text numberOfLines={ 500 }>
+		                <RX.Picker style={styles.dropdown}
+		                    items={ pickerItems }
+		                    selectedValue={ this.state.gender }
+		                    onValueChange={ this._ongenderChange }
+		                />
+		            </RX.Text>
+
+
+                    <DatePicker styles={styles} />  
+	
+
+                    <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
+                        <RX.Text style={ styles.buttonText }>
+                            Submit
+                        </RX.Text>
+                    </RX.Button>
+
+
                     <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
                         <RX.Text style={ styles.buttonText }>
                             Go Back
                         </RX.Text>
                     </RX.Button>
-
-                    <RX.Text style={ styles.titleText }>
-                        Here is a simple form control built using ReactXP
-                    </RX.Text>
-
-                    <RX.TextInput placeholder="First Name" defaultValue={this.state.name} onChangeText={this._onNameChange}  style={styles.textInput} /> 
-
-                    <RX.TextInput placeholder="Address" multiline="true" defaultValue={this.state.address} onChangeText={this._onAddressChange}  style={[styles.textInput]} />
-
-                    <RX.Text numberOfLines={ 5 }>
-		                <RX.Text> { 'Choose your mood? ' } </RX.Text>
-		                <RX.Picker
-		                    items={ pickerItems }
-		                    selectedValue={ this.state.mood }
-		                    onValueChange={ this._onMoodChange }
-		                />
-		            </RX.Text>
-
-		            <RX.Text style={ styles.titleText }>
-                        Hello Mr. {this.state.name}
-                    </RX.Text>
-
-                    <RX.Text style={ styles.titleText }>
-                        Address. {this.state.address}
-                    </RX.Text>
-
-                    <RX.Text style={ styles.titleText }>
-                        Your are in {this.state.mood} mood.
-                    </RX.Text>
-	
-
 
                 </RX.View>
             </RX.ScrollView>        
@@ -125,17 +141,19 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
 
     }    
     private 
-    	_onMoodChange = (mood: string, itemIndex: number) => {
+        _ongenderChange = (mood: string, itemIndex: number) => {
         		this.setState({ mood: mood }
-        );
-       } 		
+            );
+        } 		
 
         _onNameChange = (name: string) => {
         		this.setState({ name: name }
-        );
+            );
         }
         _onAddressChange = (address: string) => {
         		this.setState({ address: address }
-        );		
-	}
+            );
+        }
+
+     
 }
