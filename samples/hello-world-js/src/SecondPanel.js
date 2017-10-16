@@ -9,6 +9,7 @@ import {default as RXVideo} from 'reactxp-video';
 import ProgressIndicator from './ProgressIndicator';
 import ToggleSwitch from './ToggleSwitch';
 
+
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
         alignSelf: 'stretch',

@@ -93,6 +93,12 @@ export default class MainPanel extends RX.Component{
                             See More Examples
                         </RX.Text>
                     </RX.Button>
+
+                    <RX.Button style={ styles.roundButton } onPress={ this.props.onPressNavigateForm }>
+                        <RX.Text style={ styles.buttonText }>
+                            See More Forms
+                        </RX.Text>
+                    </RX.Button>
                 </RX.View>
             </RX.ScrollView>
         );

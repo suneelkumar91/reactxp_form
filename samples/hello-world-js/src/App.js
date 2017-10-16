@@ -7,12 +7,16 @@ import RX from 'reactxp';
 
 import { Navigator } from 'reactxp-navigation';
 
+
 import MainPanel from './MainPanel';
 import SecondPanel from './SecondPanel';
 
+import FormPanel from './FormPanel'
+
 let NavigationRouteId = {
     MainPanel: "MainPanel",
-    SecondPanel: "SecondPanel"
+    SecondPanel: "SecondPanel",
+    FormPanel: "FormPanel"
 };
 
 const styles = {
@@ -57,10 +61,12 @@ export default class App extends RX.Component {
     _renderScene(navigatorRoute) {
         switch (navigatorRoute.routeId) {
             case NavigationRouteId.MainPanel:
-                return <MainPanel onPressNavigate={ this._onPressNavigate }/>;
+                return <MainPanel onPressNavigate={ this._onPressNavigate } onPressNavigateForm={ this._onPressNavigateForm }/>;
 
             case NavigationRouteId.SecondPanel:
                 return <SecondPanel onNavigateBack={ this._onPressBack }/>;
+            case NavigationRouteId.ThirdPanel:    
+                return <FormPanel _onPressNavigateForm={ this._onPressNavigateForm } />;
         }
 
         return null;
@@ -76,7 +82,19 @@ export default class App extends RX.Component {
         });
     }
 
+    _onPressNavigateForm() {
+        this._navigator.push({
+            routeId: NavigationRouteId.ThirdPanel,
+            sceneConfigType: "FloatFromRight",
+            customSceneConfig: {
+                hideShadow: true
+            }
+        });
+    }
+
     _onPressBack() {
         this._navigator.pop();
     }
+
+    
 };
