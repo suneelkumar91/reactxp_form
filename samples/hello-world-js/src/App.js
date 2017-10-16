@@ -67,7 +67,7 @@ export default class App extends RX.Component {
             case NavigationRouteId.SecondPanel:
                 return <SecondPanel onNavigateBack={ this._onPressBack }/>;
             case NavigationRouteId.ThirdPanel:    
-                return <FormPanel onPressNavigateForm={ this._onPressNavigateForm } />;
+                return <FormPanel onNavigateBack={ this._onPressBack } />;
         }
 
         return null;
