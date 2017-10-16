@@ -11,7 +11,7 @@ import { Navigator } from 'reactxp-navigation';
 import MainPanel from './MainPanel';
 import SecondPanel from './SecondPanel';
 
-import FormPanel from './FormPanel'
+import FormPanel from './FormPanel';
 
 let NavigationRouteId = {
     MainPanel: "MainPanel",
@@ -35,6 +35,7 @@ export default class App extends RX.Component {
         this._renderScene = this._renderScene.bind(this);
         this._onPressNavigate = this._onPressNavigate.bind(this);
         this._onPressBack = this._onPressBack.bind(this);
+        this._onPressNavigateForm = this._onPressNavigateForm.bind(this);
     }
 
     componentDidMount() {
@@ -66,7 +67,7 @@ export default class App extends RX.Component {
             case NavigationRouteId.SecondPanel:
                 return <SecondPanel onNavigateBack={ this._onPressBack }/>;
             case NavigationRouteId.ThirdPanel:    
-                return <FormPanel _onPressNavigateForm={ this._onPressNavigateForm } />;
+                return <FormPanel onPressNavigateForm={ this._onPressNavigateForm } />;
         }
 
         return null;
