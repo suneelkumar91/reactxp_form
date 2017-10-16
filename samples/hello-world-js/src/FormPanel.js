@@ -4,6 +4,9 @@ import RX from 'reactxp';
 import ProgressIndicator from './ProgressIndicator';
 import ToggleSwitch from './ToggleSwitch';
 import DatePicker from './DatePicker';
+import TextField from './TextField';
+
+import Cell from './Cell'
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
@@ -82,6 +85,8 @@ const pickerItems: RX.Types.PickerPropsItem[] = [
     }
 ];
 
+const FieldTypes = ['TextField', 'AddressField', 'SelectField', 'DatePicker']
+
 export default class FormPanel extends RX.Component <null, { name: string, address: string, mood: string }> {
 
 	constructor() {
@@ -99,11 +104,11 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
             <RX.ScrollView style={ styles.scroll }>
                 <RX.View style={ styles.container }>
                     
-
                     <RX.Text style={ styles.titleText }>
                         Here is a simple form control built using ReactXP
                     </RX.Text>
-                    <RX.Text> Full Name  </RX.Text>    
+                    <RX.Text> Full Name  </RX.Text>
+
                     <RX.TextInput placeholder="Full Name" defaultValue={this.state.name} onChangeText={this._onNameChange}  style={styles.textInput} /> 
                     <RX.Text> Address </RX.Text>    
                     <RX.TextInput placeholder="Address" multiline="true" defaultValue={this.state.address} onChangeText={this._onAddressChange}   style={[styles.addressInput]} />
@@ -119,7 +124,6 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
 
 
                     <DatePicker styles={styles} />  
-	
 
                     <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
                         <RX.Text style={ styles.buttonText }>
@@ -134,8 +138,18 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
                         </RX.Text>
                     </RX.Button>
 
+                    <RX.Text style={ styles.titleText }>
+                        Cell Field control built using ReactXP
+                    </RX.Text>
+
+                    {FieldTypes.map((FieldType) => <Cell  
+                     FieldType = {FieldType} />)}
+                    
+
                 </RX.View>
-            </RX.ScrollView>        
+            </RX.ScrollView>  
+
+                   
         )
 
 
