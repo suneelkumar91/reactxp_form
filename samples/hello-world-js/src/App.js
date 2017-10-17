@@ -13,10 +13,13 @@ import SecondPanel from './SecondPanel';
 
 import FormPanel from './FormPanel';
 
+import PrintData from './PrintData';
+
 let NavigationRouteId = {
     MainPanel: "MainPanel",
     SecondPanel: "SecondPanel",
-    FormPanel: "FormPanel"
+    FormPanel: "FormPanel",
+    PrintData: "PrintData"
 };
 
 const styles = {
@@ -36,6 +39,7 @@ export default class App extends RX.Component {
         this._onPressNavigate = this._onPressNavigate.bind(this);
         this._onPressBack = this._onPressBack.bind(this);
         this._onPressNavigateForm = this._onPressNavigateForm.bind(this);
+        this._onSubmitForm = this._onSubmitForm.bind(this);
     }
 
     componentDidMount() {
@@ -66,8 +70,10 @@ export default class App extends RX.Component {
 
             case NavigationRouteId.SecondPanel:
                 return <SecondPanel onNavigateBack={ this._onPressBack }/>;
-            case NavigationRouteId.ThirdPanel:    
-                return <FormPanel onNavigateBack={ this._onPressBack } />;
+            case NavigationRouteId.FormPanel:    
+                return <FormPanel onSubmitForm={this._onSubmitForm } onNavigateBack={ this._onPressBack } />;
+            case NavigationRouteId.PrintData:    
+                return <PrintData onNavigateBack={ this._onPressBack } />;    
         }
 
         return null;
@@ -85,7 +91,17 @@ export default class App extends RX.Component {
 
     _onPressNavigateForm() {
         this._navigator.push({
-            routeId: NavigationRouteId.ThirdPanel,
+            routeId: NavigationRouteId.FormPanel,
+            sceneConfigType: "FloatFromRight",
+            customSceneConfig: {
+                hideShadow: true
+            }
+        });
+    }
+
+    _onSubmitForm(data) {
+        this._navigator.push({
+            routeId: NavigationRouteId.PrintData,
             sceneConfigType: "FloatFromRight",
             customSceneConfig: {
                 hideShadow: true

@@ -12,7 +12,7 @@ export default class SelectField extends RX.Component{
                 <RX.Text numberOfLines={ 2 }>	
                     <RX.Picker style={styles.dropdown}
                         items={ data.dataSource }
-                        onValueChange="void;"
+                        onValueChange= {this.props.onChange(event)}
                         name= {data.fieldName}
                     />
                 </RX.Text>

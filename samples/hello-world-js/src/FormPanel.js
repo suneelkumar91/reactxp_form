@@ -14,12 +14,14 @@ const jsonData = [
     {
         cellType: "textField",
         fieldLabel: "Phone",
-        fieldName: "phone"
+        fieldName: "phone",
+        keyboardType: "number-pad",
     },
     {
         cellType: "textField",
         fieldLabel: "Email",
-        fieldName: "email"
+        fieldName: "email",
+        keyboardType: "email-address",
     },
     {
         cellType: "dateField",
@@ -89,21 +91,51 @@ const jsonData = [
     }
 ];
 
+   
 export default class FormPanel extends RX.Component {
-    
+    constructor(props) {
+      super(props);
+      this.state = {
+      }
+    }  
+
 	render(): JSX.Element {
 		return (
             <RX.ScrollView style={ styles.scroll }>
                 <RX.View style={ styles.container }>
                     
                     <RX.Text style={ styles.titleText }>
-                        Cell Field control built using ReactXP
+                        Cell Field control built using ReactXP     
                     </RX.Text>
 
-                    {jsonData.map((data, key) => <Cell data={data} />)}
-                
+                    {jsonData.map((data, key) => <Cell data={data} onChange={(name,value) => this._inputChangeHandler.bind(name,data.fieldName)} />)}
+                    
+
+
+                    <RX.Button style={ styles.roundButton } onPress={ this.props.onSubmitForm }>
+                        <RX.Text style={ styles.buttonText }>
+                            Submit
+                        </RX.Text>
+                    </RX.Button>
+
+
+                    <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
+                        <RX.Text style={ styles.buttonText }>
+                            Go Back
+                        </RX.Text>
+                    </RX.Button>
+
                 </RX.View>
+
             </RX.ScrollView>  
         )
     }
-}
+
+    _inputChangeHandler = (name,value) => {
+        this.setState({ [name]: value });
+
+        console.log( this.state )
+    }
+
+};
+

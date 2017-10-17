@@ -19,11 +19,11 @@ export default class Cell extends RX.Component {
           var data = this.props.data;
           switch (data.cellType) { 
             case CellTypes.TextField:
-                return(<TextField styles={styles} data={data}  />) 
+                return(<TextField styles={styles} data={data} onChange={this.props.onChange} />) 
             case CellTypes.SelectField:
-                return(<SelectField  styles={styles} data={data} />)
+                return(<SelectField  styles={styles} data={data} onChange={this.props.onChange} />)
             case CellTypes.DatePicker:
-            	return (<DatePicker styles={styles} data={data} />)        
+            	return (<DatePicker styles={styles} data={data} onChange={this.props.onChange} />)        
         }
     }
 }	

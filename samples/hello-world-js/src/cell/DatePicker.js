@@ -212,7 +212,8 @@ export default class DatePicker extends RX.Component{
 		this.state = {
 			date: 1,
 			month: 'January',
-			year: 1990
+			year: 1990,
+            full_date: 'January, 1 1990'
 		}
 	}
 
@@ -223,28 +224,23 @@ export default class DatePicker extends RX.Component{
                 <RX.View>
     				<RX.Text style={styles.LabelText}>{data.fieldLabel}</RX.Text> 
     				<RX.Text numberOfLines={ 500 }>
-    	                <RX.Picker name={data.fieldName + "_dd"} style={styles.datePickerDate} items={ DateList } selectedValue={ this.state.date } onValueChange={ this._onDateChange } />
-    	                <RX.Picker name={data.fieldName + "_mm"} style={styles.datePickerMonth} items={ MonthList } selectedValue={ this.state.month } onValueChange={ this._onMonthChange } />
-    	                <RX.Picker name={data.fieldName + "_yy"} style={styles.datePickerYear} items={ YearList } selectedValue={ this.state.year } onValueChange={ this._onYearChange } />
+    	                <RX.Picker name={data.fieldName + "_dd"} style={styles.datePickerDate} items={ DateList } selectedValue={ this.state.date } onValueChange={ this.props.onChange(event)} />
+    	                <RX.Picker name={data.fieldName + "_mm"} style={styles.datePickerMonth} items={ MonthList } selectedValue={ this.state.month } onValueChange={ this.props.onChange(event) } />
+    	                <RX.Picker name={data.fieldName + "_yy"} style={styles.datePickerYear} items={ YearList } selectedValue={ this.state.year } onValueChange={ this.props.onChange(event) } />
     				</RX.Text>
                 </RX.View>
 			)
 	}
 
 	private 
-        _onDateChange = (date: string, itemIndex: number) => {
-        		this.setState({ date: date }
-            );
+        _onDateChange = (date, itemIndex) => {
+            this.state({date: date })
         }
 
-        _onMonthChange = (month: string, itemIndex: number) => {
-        		this.setState({ month: month }
-            );
+        _onMonthChange = (month, itemIndex) => {
+        	this.setState({ month: month })
         }
-
-        _onYearChange = (year: string, itemIndex: number) => {
-        		this.setState({ year: year }
-            );
+        _onYearChange = (year, itemIndex) => {
+        	this.setState({ year: year })
         } 	
-
 }
