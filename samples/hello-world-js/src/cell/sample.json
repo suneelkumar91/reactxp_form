@@ -1,0 +1,83 @@
+[
+    {
+        cellType: "textField",
+        fieldLabel: "Name",
+        fieldName: "userName"
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Phone",
+        fieldName: "phone"
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Email",
+        fieldName: "email"
+    },
+    {
+        cellType: "dateField",
+        fieldLabel: "Date Of Birth",
+        fieldName: "date_of_birth"
+    },
+
+    {
+        cellType: "textField",
+        fieldLabel: "Description",
+        fieldName: "description",
+        multiline: true
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Interest",
+        fieldName: "interest",
+        isEditable: true
+    },
+    {
+       cellType: "selectField",
+       fieldLabel: "Gender",
+       fieldName: "gender",
+       dataSource: [
+          {
+            label: 'Male',
+            value: 'male'
+          },
+          {
+            label: 'Female',
+            value: 'female'
+          }
+       ]
+       
+    },
+    {
+       cellType: "selectField",
+       fieldLabel: "How you know about us ?",
+       fieldName: "know_us",
+       dataSource: [
+          {
+            label: 'Facebook',
+            value: 'facebook'
+          },
+          {
+            label: 'Twitter',
+            value: 'twitter'
+          },
+          {
+            label: 'Google',
+            value: 'google'
+          },
+          {
+            label: 'Paper',
+            value: 'paper'
+          },
+          {
+            label: 'Friends',
+            value: 'friends'
+          },
+          {
+            label: 'Other',
+            value: 'other'
+          }
+       ]
+       
+    }
+]

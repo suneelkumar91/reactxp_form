@@ -5,8 +5,7 @@ import ProgressIndicator from './ProgressIndicator';
 import ToggleSwitch from './ToggleSwitch';
 import DatePicker from './cell/DatePicker';
 import TextField from './cell/TextField';
-
-import Cell from './cell/Cell'
+import Cell from './cell/Cell';
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
@@ -85,73 +84,109 @@ const pickerItems: RX.Types.PickerPropsItem[] = [
     }
 ];
 
+const jsonData = [
+    {
+        cellType: "textField",
+        fieldLabel: "Name",
+        fieldName: "userName"
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Phone",
+        fieldName: "phone"
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Email",
+        fieldName: "email"
+    },
+    {
+        cellType: "dateField",
+        fieldLabel: "Date Of Birth",
+        fieldName: "date_of_birth"
+    },
+
+    {
+        cellType: "textField",
+        fieldLabel: "Description",
+        fieldName: "description",
+        multiline: true
+    },
+    {
+        cellType: "textField",
+        fieldLabel: "Interest",
+        fieldName: "interest",
+        isEditable: true
+    },
+    {
+       cellType: "selectField",
+       fieldLabel: "Gender",
+       fieldName: "gender",
+       dataSource: [
+          {
+            label: 'Male',
+            value: 'male'
+          },
+          {
+            label: 'Female',
+            value: 'female'
+          }
+       ]
+       
+    },
+    {
+       cellType: "selectField",
+       fieldLabel: "How you know about us ?",
+       fieldName: "know_us",
+       dataSource: [
+          {
+            label: 'Facebook',
+            value: 'facebook'
+          },
+          {
+            label: 'Twitter',
+            value: 'twitter'
+          },
+          {
+            label: 'Google',
+            value: 'google'
+          },
+          {
+            label: 'Paper',
+            value: 'paper'
+          },
+          {
+            label: 'Friends',
+            value: 'friends'
+          },
+          {
+            label: 'Other',
+            value: 'other'
+          }
+       ]
+       
+    }
+];
 const FieldTypes = ['TextField', 'AddressField', 'SelectField', 'DatePicker']
 
-export default class FormPanel extends RX.Component <null, { name: string, address: string, mood: string }> {
-
-	constructor() {
-        super();
-
-        this.state = {
-        	name: 'Suneel',
-        	address: 'Cubix Inc',
-            gender: 'male'
-        }
-    }
+export default class FormPanel extends RX.Component {
 
 	render(): JSX.Element {
 		return (
+            
             <RX.ScrollView style={ styles.scroll }>
                 <RX.View style={ styles.container }>
                     
                     <RX.Text style={ styles.titleText }>
-                        Here is a simple form control built using ReactXP
-                    </RX.Text>
-                    <RX.Text> Full Name  </RX.Text>
-
-                    <RX.TextInput placeholder="Full Name" defaultValue={this.state.name} onChangeText={this._onNameChange}  style={styles.textInput} /> 
-                    <RX.Text> Address </RX.Text>    
-                    <RX.TextInput placeholder="Address" multiline="true" defaultValue={this.state.address} onChangeText={this._onAddressChange}   style={[styles.addressInput]} />
-
-                    <RX.Text> { 'Gender' } </RX.Text>
-                    <RX.Text numberOfLines={ 500 }>
-		                <RX.Picker style={styles.dropdown}
-		                    items={ pickerItems }
-		                    selectedValue={ this.state.gender }
-		                    onValueChange={ this._ongenderChange }
-		                />
-		            </RX.Text>
-
-
-                    <DatePicker styles={styles} />  
-
-                    <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
-                        <RX.Text style={ styles.buttonText }>
-                            Submit
-                        </RX.Text>
-                    </RX.Button>
-
-
-                    <RX.Button style={ styles.roundButton } onPress={ this.props.onNavigateBack }>
-                        <RX.Text style={ styles.buttonText }>
-                            Go Back
-                        </RX.Text>
-                    </RX.Button>
-
-                    <RX.Text style={ styles.titleText }>
                         Cell Field control built using ReactXP
                     </RX.Text>
 
-
-
-                    {FieldTypes.map((FieldType) => <Cell  
-                     FieldType = {FieldType} />)}
-                    
-
+                    {jsonData.map((value, key) => <Cell  
+                     cellType={value.cellType} fieldLabel={value.fieldLabel} fieldName={value.fieldName} multiline={value.multiline} dataSource = {value.dataSource}/>)}
+                
                 </RX.View>
             </RX.ScrollView>  
 
-                   
         )
 
 

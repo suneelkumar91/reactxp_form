@@ -60,11 +60,28 @@ const styles = {
         margin: 8,
     }),
 
-    datePicker: RX.Styles.createViewStyle({
+    datePickerDate: RX.Styles.createViewStyle({
         height: 30,
-        width: 100,
+        width: 75,
         margin: 8
 
+    }),
+    datePickerMonth: RX.Styles.createViewStyle({
+        height: 30,
+        width: 150,
+        margin: 8
+
+    }),
+    datePickerYear: RX.Styles.createViewStyle({
+        height: 30,
+        width: 150,
+        margin: 8
+
+    }),
+    LabelText: RX.Styles.createViewStyle({
+        fontSize: 14,
+        textAlign: 'left',
+        margin: 5
     })
 };
 

@@ -218,13 +218,14 @@ export default class DatePicker extends RX.Component{
 
 	render(): JSX.Element {
 		return (
-				
-				<RX.Text numberOfLines={ 500 }>
-	            	<RX.Text> D.O.B </RX.Text>
-	                <RX.Picker style={this.props.styles.datePicker} items={ DateList } selectedValue={ this.state.date } onValueChange={ this._onDateChange } />
-	                <RX.Picker style={this.props.styles.datePicker} items={ MonthList } selectedValue={ this.state.month } onValueChange={ this._onMonthChange } />
-	                <RX.Picker style={this.props.styles.datePicker} items={ YearList } selectedValue={ this.state.year } onValueChange={ this._onYearChange } />
-				</RX.Text>
+                <RX.View>
+    				<RX.Text style={this.props.styles.LabelText}>{this.props.fieldLabel}</RX.Text> 
+    				<RX.Text numberOfLines={ 500 }>
+    	                <RX.Picker name={this.props.fieldName + "_dd"} style={this.props.styles.datePickerDate} items={ DateList } selectedValue={ this.state.date } onValueChange={ this._onDateChange } />
+    	                <RX.Picker name={this.props.fieldName + "_mm"} style={this.props.styles.datePickerMonth} items={ MonthList } selectedValue={ this.state.month } onValueChange={ this._onMonthChange } />
+    	                <RX.Picker name={this.props.fieldName + "_yy"} style={this.props.styles.datePickerYear} items={ YearList } selectedValue={ this.state.year } onValueChange={ this._onYearChange } />
+    				</RX.Text>
+                </RX.View>
 			)
 	}
 
