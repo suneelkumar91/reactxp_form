@@ -3,10 +3,10 @@ import RX from 'reactxp';
 
 import ProgressIndicator from './ProgressIndicator';
 import ToggleSwitch from './ToggleSwitch';
-import DatePicker from './DatePicker';
-import TextField from './TextField';
+import DatePicker from './cell/DatePicker';
+import TextField from './cell/TextField';
 
-import Cell from './Cell'
+import Cell from './cell/Cell'
 
 const styles = {
     scroll: RX.Styles.createScrollViewStyle({
@@ -141,6 +141,8 @@ export default class FormPanel extends RX.Component <null, { name: string, addre
                     <RX.Text style={ styles.titleText }>
                         Cell Field control built using ReactXP
                     </RX.Text>
+
+
 
                     {FieldTypes.map((FieldType) => <Cell  
                      FieldType = {FieldType} />)}
