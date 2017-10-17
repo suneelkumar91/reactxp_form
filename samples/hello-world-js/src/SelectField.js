@@ -17,7 +17,7 @@ export default class SelectField extends RX.Component{
 	render(): JSX.Element {
 		return (
 			 
-            <RX.Text numberOfLines={ 500 }>
+            <RX.Text numberOfLines={ 500 }>	
                 <RX.Picker style={this.props.styles.dropdown}
                     items={ pickerItems }
                 />
