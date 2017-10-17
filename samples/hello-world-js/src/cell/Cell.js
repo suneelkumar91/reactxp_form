@@ -15,19 +15,15 @@ let CellTypes = {
 };
 
 export default class Cell extends RX.Component {
-	constructor(props) {
-        super(props);
-    }    
-
 	render() {
-          switch (this.props.cellType) { 
+          var data = this.props.data;
+          switch (data.cellType) { 
             case CellTypes.TextField:
-                return(<TextField styles={styles} fieldLabel={this.props.fieldLabel} fieldName={this.props.fieldName} multiline={this.props.multiline}  />) 
+                return(<TextField styles={styles} data={data}  />) 
             case CellTypes.SelectField:
-                return(<SelectField fieldLabel={this.props.fieldLabel} fieldName={this.props.fieldName} dataSource={this.props.dataSource} styles={styles} />)
+                return(<SelectField  styles={styles} data={data} />)
             case CellTypes.DatePicker:
-            	return (<DatePicker styles={styles} fieldLabel={this.props.fieldLabel} fieldName={this.props.fieldName} />)        
-        }  
+            	return (<DatePicker styles={styles} data={data} />)        
+        }
     }
-
 }	
