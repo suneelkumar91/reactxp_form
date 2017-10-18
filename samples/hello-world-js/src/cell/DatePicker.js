@@ -55,6 +55,10 @@ const DateList: RX.Types.PickerPropsItem[] = [
     },
     {
         label: '15',
+        value: 15
+    },
+    {
+        label: '16',
         value: 16
     },
     {
@@ -63,6 +67,10 @@ const DateList: RX.Types.PickerPropsItem[] = [
     },
     {
         label: '18',
+        value: 18
+    },
+    {
+        label: '19',
         value: 19
     },
     {
@@ -71,7 +79,7 @@ const DateList: RX.Types.PickerPropsItem[] = [
     },
     {
        label: '21',
-       value: 1
+       value: 21
     },
     {
         label: '22',
@@ -87,6 +95,10 @@ const DateList: RX.Types.PickerPropsItem[] = [
     },
     {
         label: '25',
+        value: 25
+    },
+    {
+        label: '26',
         value: 26
     },
     {
@@ -95,6 +107,10 @@ const DateList: RX.Types.PickerPropsItem[] = [
     },
     {
         label: '28',
+        value: 28
+    },
+    {
+        label: '29',
         value: 29
     },
     {
@@ -218,29 +234,53 @@ export default class DatePicker extends RX.Component{
 	}
 
 	render(): JSX.Element {
-        var data = this.props.data;
-        var styles = this.props.styles;
+        const {data, styles, ...rest} = this.props;
 		return (
                 <RX.View>
     				<RX.Text style={styles.LabelText}>{data.fieldLabel}</RX.Text> 
     				<RX.Text numberOfLines={ 500 }>
-    	                <RX.Picker name={data.fieldName + "_dd"} style={styles.datePickerDate} items={ DateList } selectedValue={ this.state.date } onValueChange={ this.props.onChange(event)} />
+    	                <RX.Picker name={data.fieldName + "_dd"} style={styles.datePickerDate} items={ DateList } selectedValue={ this.state.date } onValueChange= {this.props.onChange(event)}/>
     	                <RX.Picker name={data.fieldName + "_mm"} style={styles.datePickerMonth} items={ MonthList } selectedValue={ this.state.month } onValueChange={ this.props.onChange(event) } />
     	                <RX.Picker name={data.fieldName + "_yy"} style={styles.datePickerYear} items={ YearList } selectedValue={ this.state.year } onValueChange={ this.props.onChange(event) } />
     				</RX.Text>
+                    <RX.Text>{this.props.value}</RX.Text>
                 </RX.View>
 			)
 	}
 
+    _onChange =(value) => {
+          
+
+          console.log(type);
+          console.log(value);
+          switch(type){
+            case 'dateChange':
+                this._onDateChange();
+            case 'monthChange':
+                this._onMonthChange();
+            case 'yearChange':
+                this._onYearChange();        
+          }
+          this.props.onChange(this.state.full_date)
+    }
+
 	private 
         _onDateChange = (date, itemIndex) => {
-            this.state({date: date })
+            this.props.onChange(this.state.full_date);
+            this.setState((prevState, props) => {
+                return {date: date, full_date: (prevState.month + ", " + date + " " + prevState.year)}
+            })
+            //this.props.onChange(this.state.full_date);
         }
 
         _onMonthChange = (month, itemIndex) => {
-        	this.setState({ month: month })
+            this.setState((prevState, props) => {
+                return {month: month, full_date: (month + ", " + prevState.date + " " + prevState.year)}
+            })
         }
         _onYearChange = (year, itemIndex) => {
-        	this.setState({ year: year })
-        } 	
+        	this.setState((prevState, props) => {
+                return {year: year, full_date: (prevState.month + ", " + prevState.date + " " + year)}
+            })
+        }
 }

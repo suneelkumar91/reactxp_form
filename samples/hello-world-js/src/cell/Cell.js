@@ -16,14 +16,14 @@ let CellTypes = {
 
 export default class Cell extends RX.Component {
 	render() {
-          var data = this.props.data;
+          const {data, ...rest} = this.props;
           switch (data.cellType) { 
             case CellTypes.TextField:
-                return(<TextField styles={styles} data={data} onChange={this.props.onChange} />) 
+                return(<TextField styles={styles} data={data} {...rest} />) 
             case CellTypes.SelectField:
-                return(<SelectField  styles={styles} data={data} onChange={this.props.onChange} />)
+                return(<SelectField  styles={styles} data={data} {...rest} />)
             case CellTypes.DatePicker:
-            	return (<DatePicker styles={styles} data={data} onChange={this.props.onChange} />)        
+            	return (<DatePicker styles={styles} data={data} {...rest} />)        
         }
     }
 }	
